@@ -1,8 +1,11 @@
 import React from 'react';
-
+import Radium from 'radium';
+import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import Divider from 'material-ui/lib/divider';
 
+import {FabMenu, FabMenuButton} from '../../src';
 import ConfigurationSelection from './configuration-selection/ConfigurationSelection';
+import DisplayExample from './DisplayExample';
 import PaperContainer from './PaperContainer';
 
 const animations = [
@@ -17,12 +20,19 @@ const layoutClasses = {
 };
 
 const styles = {
+  appContainer: {
+    height: '100%',
+  },
+
   container: {
     height: '100vh',
   },
 
-  appContainer: {
+  paperContainer: {
+    display: 'flex',
+    flexDirection: 'column',
     height: '100%',
+    position: 'relative',
   }
 };
 
@@ -33,12 +43,14 @@ const ExampleApp = React.createClass({
     return {
       isDirectionUp: true,
       isMini: false,
+      isOpen: false,
       indexOfSelectedAnimation: 0,
     };
   },
 
   render() {
     const configurationSelection = this._makeConfigurationSelection();
+    const displayExample = this._makeDisplayExample();
     return (
       <div 
         className="container-fluid"
@@ -47,8 +59,11 @@ const ExampleApp = React.createClass({
         <div className={layoutClasses.padding} />
         <div className={layoutClasses.content} style={styles.appContainer}>
           <PaperContainer>
-            {configurationSelection}
-            <Divider />
+            <div style={styles.paperContainer}>
+              {configurationSelection}
+              <Divider />
+              {displayExample}
+            </div>
           </PaperContainer>
         </div>
         <div className={layoutClasses.padding} />
@@ -78,6 +93,54 @@ const ExampleApp = React.createClass({
     return React.createElement(ConfigurationSelection, props);
   },
 
+  _makeDisplayExample() {
+    const props = {
+      animation: animations[this.state.indexOfSelectedAnimation],
+      isDirectionUp: this.state.isDirectionUp,
+      isMini: this.state.isMini,
+      isOpen: this.state.isOpen,
+      onRootClick: this._toggleOpen,
+    };
+
+    return React.createElement(DisplayExample, props);
+  },
+
+  _makeFabMenu() {
+    const childrenButtons = Array.from(Array(4).keys()) 
+      .map((i) => {
+        return (
+            <FabMenuButton
+              key={i}
+              mini={this.state.isMini}
+              secondary={true}
+            >
+              <ContentAdd />
+            </FabMenuButton>
+          )
+      });
+
+    const rootButton = (
+        <FabMenuButton>
+          <ContentAdd />
+        </FabMenuButton>
+      );
+
+    const style = Object.assign({}, styles.fabMenu, {
+      bottom: this.state.isDirectionUp ? '0px' : '',
+      top: this.state.isDirectionUp ? '' : '0px',
+    });
+
+    const props = {
+      animation: animations[this.state.indexOfSelectedAnimation],
+      childrenButtons,
+      layout: this.state.isDirectionUp ? 'upward' : 'downward',
+      rootButton,
+      style,
+    };
+
+    return React.createElement(FabMenu, props);
+  },
+
   _setNewAnimation(index) {
     this.setState({selectedAnimation: index});
   }, 
@@ -88,7 +151,11 @@ const ExampleApp = React.createClass({
 
   _toggleMini() {
     this.setState({isMini: !this.state.isMini});
-  }
+  },
+
+  _toggleOpen() {
+    this.setState({isOpen: !this.state.isOpen});
+  },
 });
 
 export default ExampleApp;

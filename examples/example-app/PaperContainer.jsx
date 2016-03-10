@@ -14,6 +14,7 @@ const styles = {
 
   paper: {
     height: '60%',
+    position: 'relative',
     width: '100%',
   }
 };
