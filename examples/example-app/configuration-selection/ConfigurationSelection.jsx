@@ -23,16 +23,49 @@ const styles = {
 }
 const ConfigurationSelection = React.createClass({
   render() {
+    const directionToggle = this._makeToggle('direction');
+    const miniToggle = this._makeToggle('mini');
+
     return(
       <div style={styles.container}>
         <div style={styles.dropdown}>
           <LayoutDropdown />
         </div>
         <div style={styles.toggle}>
-          <MiniToggle />
-          <DirectionToggle />
+          {miniToggle}
+          {directionToggle}
         </div>
       </div>
       )
-  }
+  },
+
+  _makeDropdown() {
+    const props = {
+      items: this.props.animations.animations,
+      onChange: this.props.animations.onChange,
+      value: this.props.animations.selectedIndex,
+    };
+
+    return React.createElement(LayoutDropdown, props);
+  },
+
+  _makeToggle(type) {
+    let label;
+    switch(type) {
+      case 'mini':
+        label = 'Mini buttons';
+        break;
+      case 'direction':
+        label = 'Direction up';
+        break;
+    }
+
+    const props = {
+      label,
+      isToggled: this.props[type].isToggled,
+      onToggle: this.props[type].onToggle,
+    };
+
+    return React.createElement(Toggle, props);
+  },
 })

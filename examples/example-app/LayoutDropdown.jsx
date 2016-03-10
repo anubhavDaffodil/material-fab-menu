@@ -12,6 +12,7 @@ const LayoutDropdown = React.createClass({
 
   render() {
     const menuItems = this._makeMenuItems();
+    
     return (
       <DropDownMenu
         onChange={this._handleChange}
