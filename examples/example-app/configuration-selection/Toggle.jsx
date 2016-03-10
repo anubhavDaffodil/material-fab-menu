@@ -1,5 +1,5 @@
 import React from 'react';
-import Toggle as MatToggle from 'material-ui/lib/toggle';
+import MatToggle from 'material-ui/lib/toggle';
 
 const Toggle = React.createClass({
   render() {

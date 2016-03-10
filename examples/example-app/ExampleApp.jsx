@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LayoutDropdown from './LayoutDropdown';
+import ConfigurationSelection from './configuration-selection/ConfigurationSelection';
 import PaperContainer from './PaperContainer';
 
 const animations = [
@@ -29,11 +29,14 @@ const styles = {
 const ExampleApp = React.createClass({
   getInitialState() {
     return {
-      selectedAnimation: 0,
+      isDirectionUp: true,
+      isMini: false,
+      indexOfSelectedAnimation: 0,
     };
   },
 
   render() {
+    const configurationSelection = this._makeConfigurationSelection();
     return (
       <div 
         className="container-fluid"
@@ -42,11 +45,7 @@ const ExampleApp = React.createClass({
         <div className={layoutClasses.padding} />
         <div className={layoutClasses.content} style={styles.appContainer}>
           <PaperContainer>
-            <LayoutDropdown
-              items={animations}
-              onChange={this._setNewAnimation}
-              value={this.state.selectedAnimation}
-              />
+            {configurationSelection}
           </PaperContainer>
         </div>
         <div className={layoutClasses.padding} />
@@ -54,8 +53,38 @@ const ExampleApp = React.createClass({
       )
   },
 
+  _makeConfigurationSelection() {
+    const props = {
+      animations: {
+        animations,
+        onChange: this._setNewAnimation,
+        selectedIndex: this.state.indexOfSelectedAnimation,
+      },
+
+      direction: {
+        isToggled: this.state.isDirectionUp,
+        onToggle: this._toggleDirection,
+      },
+
+      mini: {
+        isToggled: this.state.isMini,
+        onToggle: this._toggleMini,
+      }
+    };
+
+    return React.createElement(ConfigurationSelection, props);
+  },
+
   _setNewAnimation(index) {
     this.setState({selectedAnimation: index});
+  }, 
+
+  _toggleDirection() {
+    this.setState({isDirectionUp: !this.state.isDirectionUp});
+  },
+
+  _toggleMini() {
+    this.setState({isMini: !this.state.isMini});
   }
 });
 

@@ -1,8 +1,9 @@
 import Radium from 'radium';
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import LayoutDropdown from './LayoutDropdown';
 import Toggle from './Toggle';
+
 const styles = {
   container: {
     alignItems: 'center',
@@ -12,26 +13,48 @@ const styles = {
 
   dropdown: {
     display: 'flex',
+    flex: 2,
     justifyContent: 'center',
   },
 
   toggles: {
+    alignItems: 'flex-end',
     display: 'flex',
+    flex: 1,
     flexDirection: 'column',
   }
 
 }
 const ConfigurationSelection = React.createClass({
+  propTypes: {
+    animations: PropTypes.shape({
+      animations: PropTypes.arrayOf(PropTypes.string),
+      onChange: PropTypes.function,
+      value: PropTypes.function,
+    }),
+
+    direction: PropTypes.shape({
+      isToggled: PropTypes.bool,
+      onToggle: PropTypes.func,
+    }),
+
+    mini: PropTypes.shape({
+      isToggled: PropTypes.bool,
+      onToggle: PropTypes.func,
+    }),
+  },
+
   render() {
     const directionToggle = this._makeToggle('direction');
     const miniToggle = this._makeToggle('mini');
+    const layoutDropdown = this._makeDropdown();
 
     return(
       <div style={styles.container}>
         <div style={styles.dropdown}>
-          <LayoutDropdown />
+          {layoutDropdown}
         </div>
-        <div style={styles.toggle}>
+        <div style={styles.toggles}>
           {miniToggle}
           {directionToggle}
         </div>
@@ -68,4 +91,6 @@ const ConfigurationSelection = React.createClass({
 
     return React.createElement(Toggle, props);
   },
-})
+});
+
+export default Radium(ConfigurationSelection);
