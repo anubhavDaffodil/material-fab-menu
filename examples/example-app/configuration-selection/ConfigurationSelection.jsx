@@ -6,22 +6,30 @@ import Toggle from './Toggle';
 
 const styles = {
   container: {
-    alignItems: 'center',
+    alignItems: 'stretch',
     display: 'flex',
     justifyContent: 'space-around',
   },
 
   dropdown: {
+    alignItems: 'center',
     display: 'flex',
     flex: 2,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+
+  toggle : {
+    width: '120px',
   },
 
   toggles: {
-    alignItems: 'flex-end',
+    alignItems: 'center',
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
+    minWidth: '140px',
+    padding: '5px',
   }
 
 }
@@ -55,8 +63,12 @@ const ConfigurationSelection = React.createClass({
           {layoutDropdown}
         </div>
         <div style={styles.toggles}>
-          {miniToggle}
-          {directionToggle}
+          <div style={styles.toggle}>
+            {miniToggle}
+          </div>
+          <div style={styles.toggle}>
+            {directionToggle}
+          </div>
         </div>
       </div>
       )
@@ -76,10 +88,10 @@ const ConfigurationSelection = React.createClass({
     let label;
     switch(type) {
       case 'mini':
-        label = 'Mini buttons';
+        label = this.props.mini.isToggled ? 'Mini' : 'Normal';
         break;
       case 'direction':
-        label = 'Direction up';
+        label = this.props.direction.isToggled ? 'Up' : 'Down';
         break;
     }
 
