@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Divider from 'material-ui/lib/divider';
+
 import ConfigurationSelection from './configuration-selection/ConfigurationSelection';
 import PaperContainer from './PaperContainer';
 
@@ -46,6 +48,7 @@ const ExampleApp = React.createClass({
         <div className={layoutClasses.content} style={styles.appContainer}>
           <PaperContainer>
             {configurationSelection}
+            <Divider />
           </PaperContainer>
         </div>
         <div className={layoutClasses.padding} />
