@@ -142,7 +142,7 @@ const ExampleApp = React.createClass({
   },
 
   _setNewAnimation(index) {
-    this.setState({selectedAnimation: index});
+    this.setState({indexOfSelectedAnimation: index});
   }, 
 
   _toggleDirection() {
