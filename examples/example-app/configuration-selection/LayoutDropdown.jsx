@@ -1,7 +1,14 @@
 import React from 'react';
+import Radium from 'radium';
 
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+
+const styles = {
+  dropDown: {
+    width: '60%'
+  }
+};
 
 const LayoutDropdown = React.createClass({
   propTypes: {
@@ -15,7 +22,9 @@ const LayoutDropdown = React.createClass({
     
     return (
       <DropDownMenu
+        autoWidth={false}
         onChange={this._handleChange}
+        style={styles.dropDown}
         value={this.props.value}
       >
         {menuItems}
