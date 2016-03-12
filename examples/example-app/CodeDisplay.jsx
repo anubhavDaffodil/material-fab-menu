@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 import Radium from 'radium';
-
+import Highlight from 'react-highlight';
 
 const styles = {
-  code: {
-    marginBottom: '0px',
-    padding: '20px',
-    whiteSpace: 'pre',
-  },
+  // code: {
+  //   marginBottom: '0px',
+  //   padding: '20px',
+  //   whiteSpace: 'pre',
+  // },
 
   container: {
     display: 'flex',
@@ -16,10 +16,10 @@ const styles = {
     width: '100%'
   },
 
-  pre: {
-    marginBottom: '0px',
-    padding: '0px',
-  }
+  // pre: {
+  //   marginBottom: '0px',
+  //   padding: '0px',
+  // }
 };
 
 const CodeDisplay = React.createClass({
@@ -30,6 +30,7 @@ const CodeDisplay = React.createClass({
       isMini: PropTypes.bool,
     }),
   },
+
   render() {
     const snippet = this._makeSnippet();
 
@@ -39,11 +40,7 @@ const CodeDisplay = React.createClass({
       </div>
     );
   },
-  componentDidUpdate() {
-    const pre = this.refs.precode;
-    hljs.highlightBlock(pre);
-  },
-
+ 
   _makeSnippet() {
     return makeSnippet({
       animation: this.props.configuration.animation,
@@ -62,7 +59,6 @@ function makeSnippet(configObj) {
   };
 
   const template = `
-
 import {FabMenu, FabMenuButton} from 'fab-menu';
 
 // Inside component: 
@@ -88,32 +84,22 @@ render() {
 
   return (
     <FabMenu
-      animation={'${animation}'}
+      animation='${animation}'
       childrenButtons={childrenButtons}
       layout={${subSnippets.layout}}
-      onRootMouseUp={() => this.setState({open: !this.state.open})}
+      onRootMouseUp={openFn}
       open={this.state.open}
       rootButton={rootButton}
       style={{position: 'absolute', right: '0px', ${subSnippets.style}}}
     />
   )  
 }`;
-  const t = `
-  import {FabMenu, Fab} from 'fab-menu';
 
-  render() {
-    return 'whatever'
-  }
-  `
-  const html = hljs.highlight('js', template).value;
   return (
-    <pre
-      ref="precode" 
-      style={styles.pre}>
-      <code style={styles.code}
-        dangerouslySetInnerHTML={{__html: html}}>
-      </code>
-    </pre>);
+    <Highlight className="js" >
+      {template}
+    </Highlight>
+    )
 }
 
 export default Radium(CodeDisplay);
