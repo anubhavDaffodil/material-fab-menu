@@ -62,6 +62,7 @@ function makeSnippet(configObj) {
   };
 
   const template = `
+
 import {FabMenu, FabMenuButton} from 'fab-menu';
 
 // Inside component: 
@@ -94,16 +95,23 @@ render() {
       open={this.state.open}
       rootButton={rootButton}
       style={{position: 'absolute', right: '0px', ${subSnippets.style}}}
+    />
   )  
-}
-  `;
-  
+}`;
+  const t = `
+  import {FabMenu, Fab} from 'fab-menu';
+
+  render() {
+    return 'whatever'
+  }
+  `
+  const html = hljs.highlight('js', template).value;
   return (
     <pre
       ref="precode" 
       style={styles.pre}>
-      <code style={styles.code}>
-        {template}
+      <code style={styles.code}
+        dangerouslySetInnerHTML={{__html: html}}>
       </code>
     </pre>);
 }
