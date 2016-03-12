@@ -36,7 +36,7 @@ const Animations = {
   makeTranslate(isEntering, orientation, isMini=false) {
     // Determine offset
     let offset;
-    switch(`${orientation}${isEntering ? 'In' : 'Out'}${isMini && 'Mini'}`) {
+    switch(`${orientation}${isEntering ? 'In' : 'Out'}${isMini ? 'Mini' : ''}`) {
       case 'downwardIn':
         offset = -61;
         break;
@@ -62,7 +62,6 @@ const Animations = {
         offset = 46;
         break;
     }
-
     // Set translateY and reset
     let transforms;
     let reset;
