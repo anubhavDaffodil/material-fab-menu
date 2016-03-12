@@ -53,7 +53,7 @@ describe('FabMenu', () => {
   });
 
   it("does render the children buttons when open is true", () => {
-    const wrapper = shallowRender({...props, open: true});
+    const wrapper = deepRender({...props, open: true});
     expect(wrapper.find(FabMenuButton).length).to.equal(5);
   });
 

@@ -4,7 +4,7 @@ import Radium from 'radium';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 
 import CodeDisplay from './CodeDisplay';
-import {FabMenu, FabMenuButton} from '../../src';
+import {FabMenu, FabMenuButton} from '../../../src';
 
 const styles = {
   codeDisplayContainer: {
@@ -23,7 +23,7 @@ const styles = {
 
   fabMenu : {
     margin: '3px',
-    position: 'absolute',
+    position: 'static',
     right: '0px',
   },
 };

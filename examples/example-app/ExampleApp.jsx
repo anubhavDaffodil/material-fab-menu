@@ -5,7 +5,7 @@ import Divider from 'material-ui/lib/divider';
 
 import {FabMenu, FabMenuButton} from '../../src';
 import ConfigurationSelection from './configuration-selection/ConfigurationSelection';
-import DisplayExample from './DisplayExample';
+import DisplayExample from './display-example/DisplayExample';
 import PaperContainer from './PaperContainer';
 
 require('./style.css');
@@ -49,7 +49,7 @@ const ExampleApp = React.createClass({
     return {
       isDirectionUp: true,
       isMini: false,
-      isOpen: false,
+      isOpen: true,
       indexOfSelectedAnimation: 0,
     };
   },

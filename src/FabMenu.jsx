@@ -147,8 +147,11 @@ const FabMenu = React.createClass({
       )
   },
 
-  componentWillMount() {
-
+  componentDidMount() {
+    // Force the re-render if the menu starts with open=true
+    if (this.props.open) {
+      this.forceUpdate();
+    }
   },
 
   _calculateRelativeChildrenPositions() {
@@ -157,10 +160,13 @@ const FabMenu = React.createClass({
     const SPACE = 5;
 
     // Get position of root button
-    const {top: rootTop, left: rootLeft} = this.props.style.position === 'fixed'
-      ? this._getRootPosition() 
-      : {top: 0, left: 0};
+    const {top: rootTop, left: rootLeft} = this.props.style.position === 'absolute'
+      ? {top: 0, left: 0}
+      : this._getRootPosition();
 
+    const childPosition = this.props.style.position === 'absolute'
+      ? 'absolute'
+      : 'fixed';
     // the left value of a mini button so that it's centered wrt to root
     const miniLeft = rootLeft + (LENGTH - MINI_LENGTH) / 2;
     switch(this.props.layout){
@@ -179,7 +185,7 @@ const FabMenu = React.createClass({
           return {
             left,
             top,
-            position: this.props.style.position,
+            position: childPosition
           }
         });
       case 'upward':
@@ -196,14 +202,14 @@ const FabMenu = React.createClass({
           return {
             left,
             top,
-            position: this.props.style.position,
+            position: childPosition
           }
         });
     }
   },
 
   _getRootPosition() {
-    return {top: this.props.style.top, left: this.props.style.left};
+    // return {top: this.props.style.top, left: this.props.style.left};
     return this.refs.root.getBoundingClientRect();
   },
 
@@ -260,6 +266,11 @@ const FabMenu = React.createClass({
   },
 
   _makeChildrenButtons() {
+    // If this is the iniital render, we want to return null in the case
+    // that open is true, and therefore this method is called.
+    // A render with the children elements will be forced after the initial
+    // render in componentDidMount
+    if (!this.refs.root) {return null};
     const positions = this._calculateRelativeChildrenPositions();
     const childrenButtonsLength = this.props.childrenButtons.length;
     return this.props.childrenButtons.map((button, index) => {
