@@ -11,6 +11,9 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 module.exports = {
   devtool: 'eval',
   module: {
+    noParse: [
+      /sinon/
+    ],
     preLoaders: [
       {
         test: /\.(js|jsx)$/,
@@ -22,7 +25,7 @@ module.exports = {
     ],
     loaders: [
       {
-        test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
+        test: /\.(json|png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
         loader: 'null-loader'
       },
       {
@@ -47,8 +50,14 @@ module.exports = {
       sources: srcPath + 'sources/',
       stores: srcPath + 'stores/',
       styles: srcPath + 'styles/',
-      config: srcPath + 'config/' + process.env.REACT_WEBPACK_ENV
+      config: srcPath + 'config/' + process.env.REACT_WEBPACK_ENV,
+      sinon: 'sinon/pkg/sinon.js',
     }
+  },
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
   },
   plugins: [
     new BowerWebpackPlugin({

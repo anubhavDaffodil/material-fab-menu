@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import {velocityHelpers, VelocityTransitionGroup} from 'velocity-react';
 import 'velocity-animate';
@@ -131,18 +132,24 @@ const FabMenu = React.createClass({
   },
 
   render() {
-    console.log(this.props.open);
     return (
       <div 
         ref="root"
         style={this.props.style}
       >
         {this._makeRootButton()}
-        <VelocityTransitionGroup enter={this._makeAnimationIn()} leave={this._makeAnimationOut()}>
+        <VelocityTransitionGroup
+          enter={this._makeAnimationIn()} 
+          leave={this._makeAnimationOut()}
+        >
           {this.props.open ? this._makeChildrenButtons() : null}
         </VelocityTransitionGroup>
       </div>
       )
+  },
+
+  componentWillMount() {
+
   },
 
   _calculateRelativeChildrenPositions() {
@@ -197,6 +204,7 @@ const FabMenu = React.createClass({
   },
 
   _getRootPosition() {
+    return {top: this.props.style.top, left: this.props.style.left};
     return this.refs.root.getBoundingClientRect();
   },
 
