@@ -32,8 +32,10 @@ const Animations = {
     ]
   }),
 
-  // TODO refactor, the arguments are confusing.  An options object might be better
-  makeTranslate(isEntering, orientation, isMini=false) {
+  makeTranslate(options) {
+    // Get options and assign default isMini
+    const {isEntering, orientation, isMini} = Object.assign({isMini: false}, options);
+
     // Determine offset
     let offset;
     switch(`${orientation}${isEntering ? 'In' : 'Out'}${isMini ? 'Mini' : ''}`) {
@@ -159,14 +161,17 @@ const FabMenu = React.createClass({
     const MINI_LENGTH = 40;
     const SPACE = 5;
 
-    // Get position of root button
+    // Get position of root button. Absolute positioning doesn't work as expected
+    // with getRootPosition.
     const {top: rootTop, left: rootLeft} = this.props.style.position === 'absolute'
       ? {top: 0, left: 0}
       : this._getRootPosition();
 
+    // Determine the positions of the childrenButtons.
     const childPosition = this.props.style.position === 'absolute'
       ? 'absolute'
       : 'fixed';
+
     // the left value of a mini button so that it's centered wrt to root
     const miniLeft = rootLeft + (LENGTH - MINI_LENGTH) / 2;
     switch(this.props.layout){
@@ -209,7 +214,6 @@ const FabMenu = React.createClass({
   },
 
   _getRootPosition() {
-    // return {top: this.props.style.top, left: this.props.style.left};
     return this.refs.root.getBoundingClientRect();
   },
 
@@ -233,9 +237,13 @@ const FabMenu = React.createClass({
           stagger: 70,
         });
       case 'translate':
-        const isMini = this.props.childrenButtons[0].props.mini;
+        const options = {
+          isEntering: true,
+          orientation: this.props.layout,
+          isMini:  this.props.childrenButtons[0].props.mini,
+        };
         return Object.assign(base, {
-          animation: Animations.makeTranslate(true, this.props.layout, isMini),
+          animation: Animations.makeTranslate(options),
         })
     }
   },
@@ -258,9 +266,13 @@ const FabMenu = React.createClass({
           stagger: 70,
         });
       case 'translate':
-        const isMini = this.props.childrenButtons[0].props.mini;
+        const options = {
+          isEntering: false,
+          orientation: this.props.layout,
+          isMini: this.props.childrenButtons[0].props.mini,
+        };
         return Object.assign(base, {
-          animation: Animations.makeTranslate(false, this.props.layout, isMini),
+          animation: Animations.makeTranslate(options),
         });
     }
   },
