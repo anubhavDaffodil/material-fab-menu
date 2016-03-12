@@ -3,11 +3,20 @@ import Radium from 'radium';
 
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 
+import CodeDisplay from './CodeDisplay';
 import {FabMenu, FabMenuButton} from '../../src';
 
 const styles = {
+  codeDisplayContainer: {
+    display: 'flex',
+    flex: 1,
+    paddingRight: '70px',
+    width: '100%'
+  },
+
   container: {
-    height: '100%',
+    display: 'flex',
+    flex: 1,
     position: 'relative',
     width: '100%',
   },
@@ -29,12 +38,28 @@ const DisplayExample = React.createClass({
   },
 
   render() {
+    const codeDisplay = this._makeCodeDisplay();
     const fabMenu = this._makeFabMenu();
    return (
     <div style={styles.container}>
+      <div style={styles.codeDisplayContainer}>
+        {codeDisplay}
+      </div>
       {fabMenu}
     </div>
    ) 
+  },
+
+  _makeCodeDisplay() {
+    const props = {
+      configuration: {
+        animation: this.props.animation,
+        isDirectionUp: this.props.isDirectionUp,
+        isMini: this.props.isMini
+      }
+    };
+
+    return React.createElement(CodeDisplay, props);
   },
 
   _makeFabMenu() {

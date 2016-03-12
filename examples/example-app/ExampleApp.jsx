@@ -8,6 +8,8 @@ import ConfigurationSelection from './configuration-selection/ConfigurationSelec
 import DisplayExample from './DisplayExample';
 import PaperContainer from './PaperContainer';
 
+require('./style.css');
+
 const animations = [
   'translate',
   'pop',
@@ -15,8 +17,8 @@ const animations = [
 ];
 
 const layoutClasses = {
-  content: "col-xs-12 col-md-6 col-lg-4",
-  padding: "col-xs-0 col-md-3 col-lg-4",
+  content: "col-xs-12 col-md-6",
+  padding: "col-xs-0 col-md-3",
 };
 
 const styles = {
@@ -26,6 +28,10 @@ const styles = {
 
   container: {
     height: '100vh',
+  },
+
+  exampleContainer: {
+    display: 'flex',
   },
 
   paperContainer: {
@@ -60,9 +66,12 @@ const ExampleApp = React.createClass({
         <div className={layoutClasses.content} style={styles.appContainer}>
           <PaperContainer>
             <div style={styles.paperContainer}>
-              {configurationSelection}
-              <Divider />
-              {displayExample}
+              <div >
+                {configurationSelection}
+              </div>
+              <div style={styles.exampleContainer}>
+                {displayExample}
+              </div>
             </div>
           </PaperContainer>
         </div>
