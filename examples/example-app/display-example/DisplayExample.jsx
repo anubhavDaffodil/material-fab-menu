@@ -23,7 +23,7 @@ const styles = {
 
   fabMenu : {
     margin: '3px',
-    position: 'static',
+    position: 'absolute',
     right: '0px',
   },
 };

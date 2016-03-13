@@ -49,7 +49,7 @@ const ExampleApp = React.createClass({
     return {
       isDirectionUp: true,
       isMini: false,
-      isOpen: true,
+      isOpen: false,
       indexOfSelectedAnimation: 0,
     };
   },
