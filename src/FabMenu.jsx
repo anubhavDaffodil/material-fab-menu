@@ -112,21 +112,22 @@ const Animations = {
 const FabMenu = React.createClass({
   propTypes: {
     animation: React.PropTypes.oneOf(['pop', 'popStaggered', 'translate']),
-    childrenButtons: React.PropTypes.node,
+    childrenButtons: React.PropTypes.node.isRequired,
     layout: React.PropTypes.oneOf(['downward', 'upward']),
     onRootMouseUp: React.PropTypes.func,
     open: React.PropTypes.bool,
-    rootButton: React.PropTypes.node,
+    rootButton: React.PropTypes.node.isRequired,
     style: React.PropTypes.object,
   },
 
   getDefaultProps() {
     return {
+      animation: 'pop',
       layout: 'upward',
+      open: false,
       style: {
         top: 600,
         left: 300,
-        lineHeight: 0,
         position: 'fixed',
       },
     }
