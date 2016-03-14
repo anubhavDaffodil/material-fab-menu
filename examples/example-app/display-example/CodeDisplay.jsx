@@ -3,23 +3,12 @@ import Radium from 'radium';
 import Highlight from 'react-highlight';
 
 const styles = {
-  // code: {
-  //   marginBottom: '0px',
-  //   padding: '20px',
-  //   whiteSpace: 'pre',
-  // },
-
   container: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
     width: '100%'
   },
-
-  // pre: {
-  //   marginBottom: '0px',
-  //   padding: '0px',
-  // }
 };
 
 const CodeDisplay = React.createClass({
@@ -84,9 +73,9 @@ render() {
 
   return (
     <FabMenu
-      animation='${animation}'
+      animation="${animation}"
       childrenButtons={childrenButtons}
-      layout={${subSnippets.layout}}
+      layout="${subSnippets.layout}"
       onRootMouseUp={openFn}
       open={this.state.open}
       rootButton={rootButton}
