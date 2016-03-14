@@ -5,7 +5,7 @@ This is a FAB menu component to be used with Call-Em-All's excellent React [mate
 
 ### Usage
 
-Demo and usage snippets can be found [here](https://theosherry.github.io/projects/fab-menu).
+~~Demo and usage snippets can be found [here](https://theosherry.github.io/projects/fab-menu).~~
 
 ~~~javascript
 import React from 'react';
