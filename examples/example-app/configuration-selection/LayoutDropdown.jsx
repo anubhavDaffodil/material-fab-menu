@@ -50,4 +50,4 @@ const LayoutDropdown = React.createClass({
 
 });
 
-export default LayoutDropdown;
+export default Radium(LayoutDropdown);
