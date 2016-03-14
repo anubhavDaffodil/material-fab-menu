@@ -7,7 +7,7 @@ This is a FAB menu component to be used with Call-Em-All's excellent React [mate
 
 Demo and usage snippets can be found [here](https://theosherry.github.io/projects/fab-menu).
 
-~~~
+~~~javascript
 import React from 'react';
 import {FabMenu, FabMenuButton} from 'material-fabmenu';
 
@@ -42,6 +42,7 @@ const Example = React.createClass({
   } 
 });
 ~~~
+
 #### FabMenuButton
 `FabMenuButton` has exactly the same API as [material-ui's FAB](http://www.material-ui.com/#/components/floating-action-button).  At this time the buttons must be passed in as props (`childrenButtons`, `rootButton`).
 
@@ -72,7 +73,7 @@ Determines whether the menu is open or not. Defaults to `false`.
 ##### `style : object`
 Styles to be applied to the root button.  This is really just to be used for positioning the menu.  `relative`, `static`, `absolute`, and `fixed` positioning are supported.
 Defaults to 
-~~~
+~~~javascript
 {
   left:300,
   position: 'fixed',
