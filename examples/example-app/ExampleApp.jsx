@@ -167,4 +167,4 @@ const ExampleApp = React.createClass({
   },
 });
 
-export default ExampleApp;
+export default Radium(ExampleApp);
