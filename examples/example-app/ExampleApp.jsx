@@ -17,8 +17,8 @@ const animations = [
 ];
 
 const layoutClasses = {
-  content: "col-xs-12 col-md-6",
-  padding: "col-xs-0 col-md-3",
+  content: "col-xs-12 col-md-8",
+  padding: "col-xs-0 col-md-2",
 };
 
 const styles = {
