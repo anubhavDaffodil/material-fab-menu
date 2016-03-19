@@ -2,6 +2,8 @@
 This is a FAB menu component to be used with Call-Em-All's excellent React [material-ui library](http://www.material-ui.com/#/)
 
 `npm install material-fabmenu`
+### Dependencies
+Aside from the aforementioned [material-iu](https://github.com/callemall/material-ui) being a peer-dependency, this component uses [velocity-react](https://github.com/twitter-fabric/velocity-react) (and so [velocity.js](http://github.com/julianshapiro/velocity)) to perform the animations.
 
 ### Usage
 
@@ -43,7 +45,7 @@ const Example = React.createClass({
   } 
 });
 ~~~
-
+### API
 #### FabMenuButton
 `FabMenuButton` has exactly the same API as [material-ui's FAB](http://www.material-ui.com/#/components/floating-action-button).  At this time the buttons must be passed in as props (`childrenButtons`, `rootButton`).
 
