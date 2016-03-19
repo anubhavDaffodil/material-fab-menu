@@ -11,7 +11,6 @@ const Toggle = React.createClass({
       />
     );
   },
-
 });
 
 export default Toggle;

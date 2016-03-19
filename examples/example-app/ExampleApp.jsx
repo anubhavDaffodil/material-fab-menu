@@ -114,42 +114,6 @@ const ExampleApp = React.createClass({
     return React.createElement(DisplayExample, props);
   },
 
-  _makeFabMenu() {
-    const childrenButtons = Array.from(Array(4).keys()) 
-      .map((i) => {
-        return (
-            <FabMenuButton
-              key={i}
-              mini={this.state.isMini}
-              secondary={true}
-            >
-              <ContentAdd />
-            </FabMenuButton>
-          )
-      });
-
-    const rootButton = (
-        <FabMenuButton>
-          <ContentAdd />
-        </FabMenuButton>
-      );
-
-    const style = Object.assign({}, styles.fabMenu, {
-      bottom: this.state.isDirectionUp ? '0px' : '',
-      top: this.state.isDirectionUp ? '' : '0px',
-    });
-
-    const props = {
-      animation: animations[this.state.indexOfSelectedAnimation],
-      childrenButtons,
-      layout: this.state.isDirectionUp ? 'upward' : 'downward',
-      rootButton,
-      style,
-    };
-
-    return React.createElement(FabMenu, props);
-  },
-
   _setNewAnimation(index) {
     this.setState({indexOfSelectedAnimation: index});
   }, 
